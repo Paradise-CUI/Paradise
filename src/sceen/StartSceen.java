@@ -83,7 +83,7 @@ public class StartSceen {
         }
     }
 
-    // 0.5초 대기
+    // 0.8초 대기
     private static void sec08() {
         try {
             Thread.sleep(800);
