@@ -6,6 +6,7 @@ public class ZombieDefault {
     protected int DAMAGE;
     protected double HP;
     protected int MONEY;
+    protected double Infectiousness;
 
     // 빼기
     public void minusHP(double HP) {
@@ -24,8 +25,10 @@ public class ZombieDefault {
         return this.MONEY;
     }
     public int dropPotion() {
-//        return (int)(Math.floor((Math.random() * 10) + 1));
-        return 5;
+        return (int)(Math.floor((Math.random() * 10)));
+    }
+    public double getINFECTIOUSNESS() {
+        return this.Infectiousness;
     }
 
 

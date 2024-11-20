@@ -8,16 +8,18 @@ public class Player {
     boolean SpecialAttack; // 특수 공격 사용 가능 여부
     double rating; // 지지율
     double Infectiousness; // 감염율
+    String Weapon; // 무기
 
 
     public Player() { // 플레이어 기본 세팅
         this.kill = 0;
-        this.Money = 1000;
+        this.Money = 1000000; // 400
         this.HP = 300;
         this.DAMAGE = 34.0;
         this.SpecialAttack = false;
         this.rating = 1.0;
         this.Infectiousness = 0.0;
+        this.Weapon = "맨손";
         System.out.println("플레이어 객체 생성 완료");
     }
 
@@ -27,6 +29,7 @@ public class Player {
         System.out.println("                             MONEY : " + this.Money);
         System.out.println("                                HP : " + this.HP);
         System.out.println("                            DAMEGE : " + this.DAMAGE);
+        System.out.println("                            WEAPON : " + this.Weapon);
         if (this.SpecialAttack) {
             System.out.println("                        특수 공격 사용 가능");
         }
@@ -43,13 +46,22 @@ public class Player {
     public void plusKill(int kill) { // 킬 횟수 증가
         this.kill += kill;
     }
-
     public void plusMoney(int Money) {
         this.Money += Money;
     }
     public void plusHP(int HP) {
         this.HP += HP;
     }
+    public void plusDamage(double DAMAGE) {
+        this.DAMAGE += DAMAGE;
+    }
+    public void plusRating(double rating) {
+        this.rating += rating;
+    }
+    public void plusInfectiousness(double Infectiousness) {
+        this.Infectiousness += Infectiousness;
+    }
+
 
     // 마이너스
     public void minusHP(int HP) {
@@ -84,6 +96,12 @@ public class Player {
     public double getInfectiousness() {
         return this.Infectiousness;
     }
+    public String getWeapon() {
+        return this.Weapon;
+    }
+    public double getRating() {
+        return this.rating;
+    }
 
     // 설정
     public void setSpecialAttack(boolean SpecialAttack) {
@@ -91,6 +109,9 @@ public class Player {
     }
     public void setInfectiousness(double Infectiousness) {
         this.Infectiousness = Infectiousness;
+    }
+    public void setWeapon(String Weapon) {
+        this.Weapon = Weapon;
     }
 
 

@@ -7,5 +7,6 @@ public class SuperiorityZombie extends ZombieDefault { // 좀비를 상속받아
         super.DAMAGE = 300;
         super.HP = 1000;
         super.MONEY = 200;
+        super.Infectiousness = 1.5;
     }
 }

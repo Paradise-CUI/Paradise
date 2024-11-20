@@ -1,35 +1,33 @@
 package setting;
 
-import java.util.*;
+import Shop.*;
 
 public class Shop {
-    Scanner sc = new Scanner(System.in);
     String[] weapon = {"도끼", "후라이팬", "대검", "쇠뇌", "권총", "샷건", "소총", "저격총"};
-    String[] potion = {"중급 포션", "상급 포션", "마나 포션", "백신"}; // 하급 포션은 몬스터 드랍
+    String[] potion = {"중급 포션", "상급 포션", "백신"}; // 하급 포션은 몬스터 드랍
 
-    static int shopchoice = 1;
-    public static void shop() {
-//        try {
-//            shopchoice = sc.nextInt();
-//        } catch (Exception e) {
-//            System.out.println("잘못된 입력입니다. 정수만 입력해주세요.");
-//            sc.nextLine();
-//        }
+    public static void shop(int shopchoice, Player player, Inventory inventory) {
         nextText();
+        if (shopchoice == 1) {
+            WeaponShop.weapon(player);
+        } else if (shopchoice == 2) {
+            PotionShop.potion(player, inventory);
+        } else if (shopchoice == 3) {
+            StatsShop.stats(player);
+        } else if (shopchoice == 0) {
+            System.out.println("상점을 종료합니다.");
+        } else {
+            System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
 
-        switch (shopchoice) {
-            case 1:
-                System.out.println("1. 무기 상점");
-                break;
-            case 2:
-                System.out.println("2. 포션 상점");
-                break;
-            case 3:
-                System.out.println("3. 스탯 상점");
-                break;
-            default:
-                break;
         }
+    }
+
+    public static void print() {
+        System.out.println("                            1. 무기 상점");
+        System.out.println("                            2. 포션 상점");
+        System.out.println("                            3. 스탯 상점");
+        System.out.println("                            0. 상점 종료");
+        blank();
     }
 
     private boolean haveMoney() {

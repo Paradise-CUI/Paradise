@@ -103,20 +103,21 @@ public class FightSceen {
 //                    break;
 //            } // switch close
 
-            player.minusHP(zombie.getDAMAGE()); // 좀비가 플레이어에게 데미지를 줌
-
-            if (player.getSpecialAttack() && attack == 5) { // 특수공격이 활성화가 되어있고 공격의 5번이 되었다면
+            if (player.getSpecialAttack() && attack / 5 == 0) { // 특수공격이 활성화가 되어있고 공격의 5번이 되었다면
                 zombie.minusHP((player.getDAMAGE() * 3)); // 특수공격이 활성화가 되어있다면 3배의 데미지를 줌
             } else {
                 zombie.minusHP(player.getDAMAGE()); // 플레이어가 좀비에게 데미지를 줌
             }
+
+            player.minusHP((zombie.getDAMAGE() / (int) player.getRating())); // 좀비가 플레이어에게 데미지를 줌
+            player.plusInfectiousness(zombie.getINFECTIOUSNESS()); // 좀비가 플레이어에게 감염율을 줌
 
             if (player.getHP() <= 0) { // 플레이어가 죽었을 때
                 DieEnding.dieending(); // 다이 엔딩 띄우기
             }
             if (zombie.getHP() <= 0) { // 좀비가 죽었을 때
                 System.out.println("정상적으로 좀비가 죽었습니다.");
-                if (zombie.dropPotion() == 5) {
+                if (zombie.dropPotion() == 3 ||zombie.dropPotion() == 2 || zombie.dropPotion() == 1) { // 좀비가 포션을 드랍했을 때
                     System.out.println("하급 포션을 획득하였습니다.");
                     inventory.plusLowerPotion(1);
                 }

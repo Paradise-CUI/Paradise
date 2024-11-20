@@ -7,5 +7,6 @@ public class LowZombie extends ZombieDefault { // 좀비를 상속받아서 하�
         super.DAMAGE = 20;
         super.HP = 100;
         super.MONEY = 50;
+        super.Infectiousness = 0.5;
     }
 }

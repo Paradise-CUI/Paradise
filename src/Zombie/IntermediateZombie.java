@@ -7,5 +7,6 @@ public class IntermediateZombie extends ZombieDefault { // 좀비를 상속받�
         super.DAMAGE = 70;
         super.HP = 300;
         super.MONEY = 100;
+        super.Infectiousness = 1.0;
     }
 }

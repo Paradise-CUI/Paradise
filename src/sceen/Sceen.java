@@ -36,7 +36,24 @@ public class Sceen {
             } else if (select == 3) {
                 inventory.print(player);
             } else if (select == 4) {
-                Shop.shop();
+                while (true) {
+                    Shop.print();
+                    int shopchoice = 0;
+                    try {
+                        shopchoice = sc.nextInt();
+                    } catch (Exception e) {
+                        System.out.println("잘못된 입력입니다. 정수만 입력해주세요.");
+                        sc.nextLine();
+                    }
+                    if (shopchoice == 1 || shopchoice == 2 || shopchoice == 3) {
+                    } else if (shopchoice == 0) {
+                    } else {
+                        System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+                        continue;
+                    }
+                    Shop.shop(shopchoice, player, inventory);
+                    break;
+                }
             } else if (select == 5) {
                 System.out.println("저장");
             } else if (select == 6) {

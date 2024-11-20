@@ -7,5 +7,6 @@ public class BossZombie extends ZombieDefault { // 좀비를 상속받아서 보
         super.DAMAGE = 1000;
         super.HP = 100000;
         super.MONEY = 10000;
+        super.Infectiousness = 3.0;
     }
 }
