@@ -9,10 +9,10 @@ import setting.Player;
 import setting.ZombieDefault;
 
 /*
-* while로 죽을떄 까지 딜 주고 받기
-*
-*
-* */
+ * while로 죽을떄 까지 딜 주고 받기
+ *
+ *
+ * */
 
 public class FightSceen {
     public static void fightSceen(int level, Player player, Inventory inventory) {
@@ -45,7 +45,7 @@ public class FightSceen {
 
 
         int attack = 1; // 특수공격 사용을 위한 몇번의 공격을 했는지 확인
-        while (!(zombie.getHP() <= 0 || player.getHP() <= 0)) { // 좀비의 피가 0이 되거나 사람이 피가 0이 될떄까지
+        while (! (zombie.getHP() <= 0 || player.getHP() <= 0)) { // 좀비의 피가 0이 되거나 사람이 피가 0이 될떄까지
             if (attack == 6) { // 특수공격 사용으로 인한 attack 초기화 (5번 마다)
                 attack = 1;
             }
@@ -117,7 +117,7 @@ public class FightSceen {
             }
             if (zombie.getHP() <= 0) { // 좀비가 죽었을 때
                 System.out.println("정상적으로 좀비가 죽었습니다.");
-                if (zombie.dropPotion() == 3 ||zombie.dropPotion() == 2 || zombie.dropPotion() == 1) { // 좀비가 포션을 드랍했을 때
+                if (zombie.dropPotion() == 3 || zombie.dropPotion() == 2 || zombie.dropPotion() == 1) { // 좀비가 포션을 드랍했을 때
                     System.out.println("하급 포션을 획득하였습니다.");
                     inventory.plusLowerPotion(1);
                 }
@@ -140,7 +140,7 @@ public class FightSceen {
     // 다음 텍스트 전환 (스크롤)
     private static void nextText() {
         for (int i = 0; i < 100; i++) {
-            System.out.println ();
+            System.out.println();
         }
     }
 

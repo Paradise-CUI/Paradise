@@ -7,7 +7,7 @@ import setting.Player;
 import java.util.Scanner;
 
 public class MapSceenChoice {
-    public static void mainSceenChoice (Player player, Inventory inventory) {
+    public static void mainSceenChoice(Player player, Inventory inventory) {
         Scanner sc = new Scanner(System.in);
 
         int choice = 0;

@@ -13,7 +13,7 @@ public class Player {
 
     public Player() { // 플레이어 기본 세팅
         this.kill = 0;
-        this.Money = 1000000; // 400
+        this.Money = 400; // 400
         this.HP = 300;
         this.DAMAGE = 34.0;
         this.SpecialAttack = false;
@@ -31,7 +31,7 @@ public class Player {
         System.out.println("                            DAMEGE : " + this.DAMAGE);
         System.out.println("                            WEAPON : " + this.Weapon);
         if (this.SpecialAttack) {
-            System.out.println("                        특수 공격 사용 가능");
+            System.out.println("                            특수 공격 사용 가능");
         }
         System.out.println("                              킬 수 : " + this.kill);
         System.out.println("                              지지율 : " + this.rating);
@@ -46,18 +46,23 @@ public class Player {
     public void plusKill(int kill) { // 킬 횟수 증가
         this.kill += kill;
     }
+
     public void plusMoney(int Money) {
         this.Money += Money;
     }
+
     public void plusHP(int HP) {
         this.HP += HP;
     }
+
     public void plusDamage(double DAMAGE) {
         this.DAMAGE += DAMAGE;
     }
+
     public void plusRating(double rating) {
         this.rating += rating;
     }
+
     public void plusInfectiousness(double Infectiousness) {
         this.Infectiousness += Infectiousness;
     }
@@ -67,9 +72,11 @@ public class Player {
     public void minusHP(int HP) {
         this.HP -= HP;
     }
+
     public void minusMoney(int Money) {
         this.Money -= Money;
     }
+
     public void minusInfectiousness(double Infectiousness) {
         this.Infectiousness -= Infectiousness;
     }
@@ -78,6 +85,7 @@ public class Player {
     public int getHP() {
         return HP;
     }
+
     public double getDAMAGE() {
         return DAMAGE;
     }
@@ -93,12 +101,15 @@ public class Player {
     public int getMoney() {
         return this.Money;
     }
+
     public double getInfectiousness() {
         return this.Infectiousness;
     }
+
     public String getWeapon() {
         return this.Weapon;
     }
+
     public double getRating() {
         return this.rating;
     }
@@ -107,18 +118,14 @@ public class Player {
     public void setSpecialAttack(boolean SpecialAttack) {
         this.SpecialAttack = SpecialAttack;
     }
+
     public void setInfectiousness(double Infectiousness) {
         this.Infectiousness = Infectiousness;
     }
+
     public void setWeapon(String Weapon) {
         this.Weapon = Weapon;
     }
-
-
-
-
-
-
 
 
     // 공백 추가

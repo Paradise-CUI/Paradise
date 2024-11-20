@@ -18,15 +18,19 @@ public class ZombieDefault {
     public int getDAMAGE() {
         return this.DAMAGE;
     }
+
     public double getHP() {
         return this.HP;
     }
+
     public int getMONEY() {
         return this.MONEY;
     }
+
     public int dropPotion() {
-        return (int)(Math.floor((Math.random() * 10)));
+        return (int) (Math.floor((Math.random() * 10)));
     }
+
     public double getINFECTIOUSNESS() {
         return this.Infectiousness;
     }

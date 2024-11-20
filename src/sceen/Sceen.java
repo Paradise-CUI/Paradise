@@ -6,21 +6,35 @@ import choice.MapSceenChoice;
 import setting.Inventory;
 import setting.Player;
 import setting.Shop;
+import SaveLoad.*;
 
 import java.util.Scanner;
+import java.io.File;
+
+import static choice.MainSceenChoice.countinue;
 
 public class Sceen {
     public static void sceen() {
         Scanner sc = new Scanner(System.in);
-        Player player = new Player();
-        Inventory inventory = new Inventory();
-        player.print();
+        Player player = null;
+        Inventory inventory = null;
+        if (countinue) {
+            // 이어하기
+            player = PlayerJsonLoader.loadData();
+            inventory = InventoryJsonLoader.loadData();
+            player.print();
+        } else {
+            // 새 게임
+            player = new Player();
+            inventory = new Inventory();
+            player.print();
+        }
 
 
         int select = 0;
         while (true) {
             nextText();
-            System.out.println("               1. 맵, 2. 스탯, 3. 인벤토리, 4. 상점, 5. 저장, 6. 종료");
+            System.out.println("               1. 맵, 2. 스탯, 3. 인벤토리, 4. 상점, 5. 저장 및 종료, 6. 종료");
             blank();
             try {
                 select = sc.nextInt();
@@ -55,7 +69,27 @@ public class Sceen {
                     break;
                 }
             } else if (select == 5) {
-                System.out.println("저장");
+                String path1 = "db/PlayerData.json";
+                String path2 = "db/InventoryData.json";
+
+                boolean exists1 = isFileCreated(path1);
+                boolean exists2 = isFileCreated(path2);
+
+                if (exists1 || exists2) {
+                    System.out.println("데이터가 이미 존재합니다. 데이터를 덮어 씌우시겠습니까? (y/n)");
+                    String answer = sc.next();
+                    if (answer.equals("y") || answer.equals("Y")) {
+                        PlayerJsonSaver.saveData(player);
+                        InventoryJsonSaver.saveData(inventory);
+                        break;
+                    } else {
+                        System.out.println("저장을 취소합니다.");
+                    }
+                } else {
+                    PlayerJsonSaver.saveData(player);
+                    InventoryJsonSaver.saveData(inventory);
+                    break;
+                }
             } else if (select == 6) {
                 System.out.println("종료");
                 break;
@@ -64,6 +98,11 @@ public class Sceen {
             }
         }
 
+    }
+
+    public static boolean isFileCreated(String filePath) {
+        File file = new File(filePath);
+        return file.exists();
     }
 
     private static void blank() {

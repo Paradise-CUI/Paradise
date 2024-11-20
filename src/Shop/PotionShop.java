@@ -78,22 +78,26 @@ public class PotionShop {
         System.out.println("                            0. 상점 종료");
         blank();
     }
+
     public static boolean haveMoney(Player player, int select) {
         if (player.getMoney() >= potionPrice[select - 1]) {
             return true;
         }
         return false;
     }
+
     private static void blank() {
         for (int i = 0; i < 15; i++) {
             System.out.println();
         }
     }
+
     private static void nextText() {
         for (int i = 0; i < 100; i++) {
             System.out.println();
         }
     }
+
     private static void sec2() {
         try {
             Thread.sleep(1800);
@@ -101,6 +105,7 @@ public class PotionShop {
             e.printStackTrace();
         }
     }
+
     private static void sec1() {
         try {
             Thread.sleep(1000);

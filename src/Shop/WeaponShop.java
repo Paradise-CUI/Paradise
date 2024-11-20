@@ -13,6 +13,7 @@ public class WeaponShop {
     static int[] price = {200, 500, 1000, 4000, 7000, 9000, 12000, 15000};
     // 공격력
     static double[] damage = {20.0, 30.0, 60.0, 100.0, 300.0, 700.0, 800.0, 1000.0};
+
     public static void weapon(Player player) {
         int select = 0;
         while (true) {
@@ -24,7 +25,7 @@ public class WeaponShop {
                 sc.nextLine();
             }
             if (select == 1) {
-                if (!(haveWeapon[select - 1])) {
+                if (! (haveWeapon[select - 1])) {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
@@ -46,7 +47,7 @@ public class WeaponShop {
                     break;
                 }
             } else if (select == 2) {
-                if (!(haveWeapon[select - 1])) {
+                if (! (haveWeapon[select - 1])) {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
@@ -68,7 +69,7 @@ public class WeaponShop {
                     break;
                 }
             } else if (select == 3) {
-                if (!(haveWeapon[select - 1])) {
+                if (! (haveWeapon[select - 1])) {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
@@ -89,7 +90,7 @@ public class WeaponShop {
                     break;
                 }
             } else if (select == 4) {
-                if (!(haveWeapon[select - 1])) {
+                if (! (haveWeapon[select - 1])) {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
@@ -111,7 +112,7 @@ public class WeaponShop {
                     break;
                 }
             } else if (select == 5) {
-                if (!(haveWeapon[select - 1])) {
+                if (! (haveWeapon[select - 1])) {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
@@ -133,7 +134,7 @@ public class WeaponShop {
                     break;
                 }
             } else if (select == 6) {
-                if (!(haveWeapon[select - 1])) {
+                if (! (haveWeapon[select - 1])) {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
@@ -155,7 +156,7 @@ public class WeaponShop {
                     break;
                 }
             } else if (select == 7) {
-                if (!(haveWeapon[select - 1])) {
+                if (! (haveWeapon[select - 1])) {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
@@ -177,7 +178,7 @@ public class WeaponShop {
                     break;
                 }
             } else if (select == 8) {
-                if (!(haveWeapon[select - 1])) {
+                if (! (haveWeapon[select - 1])) {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
@@ -202,8 +203,7 @@ public class WeaponShop {
                 System.out.println("상점을 종료합니다.");
                 sec1();
                 break;
-            }
-            else {
+            } else {
                 System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
                 sec1();
                 nextText();
@@ -256,6 +256,7 @@ public class WeaponShop {
             e.printStackTrace();
         }
     }
+
     private static void sec1() {
         try {
             Thread.sleep(900);

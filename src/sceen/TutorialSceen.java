@@ -29,6 +29,7 @@ public class TutorialSceen {
             e.printStackTrace();
         }
     }
+
     // 2초 대기
     private static void sec2() {
         try {
