@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 
 public class SacrificeEnding {
     public static void sacrificeEnding() {
+        blank();
         System.out.println("                 당신은 좀비들과 격렬히 싸우다 죽었습니다.");
         blank();
         sec3();
@@ -18,17 +19,28 @@ public class SacrificeEnding {
         blank();
         sec3();
         nextText();
+        System.out.println("                              죽음");
+        blank();
+        sec3();
+        nextText();
         try {
             String Sacrifice = new String(Files.readAllBytes(Paths.get("Art/Ending/Sacrifice.txt")));
             System.out.println(Sacrifice); // 파일 내용 출력
         } catch (IOException e) {
             System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
         }
+        miniblank();
         System.exit(0);
     }
     // 공백 추가
     private static void blank() {
         for (int i = 0; i < 15; i++) {
+            System.out.println();
+        }
+    }
+
+    private static void miniblank() {
+        for (int i = 0; i < 3; i++) {
             System.out.println();
         }
     }
