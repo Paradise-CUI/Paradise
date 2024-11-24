@@ -2,6 +2,10 @@ package sceen;
 
 // 게임에 들어오는 씬 생성
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class StartSceen {
     public static void startSceen() {
         // 창 크기 설정 메시지
@@ -40,21 +44,12 @@ public class StartSceen {
         sec3();
         nextText();
 
-        System.out.print(
-                "                            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "                            ⠀⠀⠀⠀⠀⠀⠀⠀⠠⣀⡀⠀⠀⠀⠀⠀⢀⣜⠉⣏⠀⠀⠀⠀⠀⠀⠀⢀⣴⠃\n" +
-                        "                            ⠀⠀⠀⠀⠀⠀⠀⠀⠚⡬⠧⠀⠀⠀⠀⠀⠀⠈⠎⠉⠀⠀⠀⠀⠀⣠⢶⡿⠃⠀\n" +
-                        "                            ⠀⠀⠀⠀⠀⣄⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠠⡒⢕⢕⠕⠁⠀⠀\n" +
-                        "                            ⠀⠀⠀⠀⠀⡇⠙⢦⡀⠀⢀⣀⠤⡴⠀⠀⢀⡀⠤⢒⡨⠐⡉⠔⡡⠂⠀⠀⠀⠀\n" +
-                        "                            ⠀⠀⠀⠀⠀⠃⠀⠀⠈⠉⠁⠀⢰⠃⢀⡉⠤⠐⠈⡁⠔⢊⠔⠈⠀⠀⠀⠀⠀⠀\n" +
-                        "                            ⠀⠀⢀⡤⠚⠁⠀⠀⠀⠀⠀⢀⠏⠁⣀⠠⠔⠂⢁⠠⠂⠁⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "                            ⠠⢶⣁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⡁⠀⡀⠄⠂⠁⠀⠀⠀⠀⡀⢀⠀⠀⠀⠀⠀\n" +
-                        "                            ⠀⠀⠀⠉⠑⢲⠀⠀⠀⢀⣀⣀⣀⡙⣅⠀⠀⠀⠀⠀⠀⠠⠔⡈⣫⡀⠀⠀⠀⠀\n" +
-                        "                            ⠀⠀⠀⠀⠀⠘⡆⠀⡰⠋⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠏⠀⠀⠀⠀⠀⠀\n" +
-                        "                            ⠀⢠⡀⣀⠀⠀⢣⠜⠁⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "                            ⠠⢮⢀⣢⡀⠀⠈⠀⠀⠀⠀⠀⠀⢀⠏⠒⢺⠃⠀⠀⠀⠀⠀⠀⠀⠀⢠⣀⡀⠀\n" +
-                        "                            ⠀⠀⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠃⡄⢠⢈⣆⠀⠀⠀⠀⠀⠀⠀⠐⠻⡼⠆⠀\n" +
-                        "                            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n");
+        try {
+            String Star = new String(Files.readAllBytes(Paths.get("Art/Sceen/Star.txt")));
+            System.out.println(Star); // 파일 내용 출력
+        } catch (IOException e) {
+            System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+        }
 
         blank();
         sec08();

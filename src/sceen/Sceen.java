@@ -22,19 +22,19 @@ public class Sceen {
             // 이어하기
             player = PlayerJsonLoader.loadData();
             inventory = InventoryJsonLoader.loadData();
-            player.print();
         } else {
             // 새 게임
             player = new Player();
             inventory = new Inventory();
-            player.print();
         }
+
+        player.print();
 
 
         int select = 0;
         while (true) {
             nextText();
-            System.out.println("               1. 맵, 2. 스탯, 3. 인벤토리, 4. 상점, 5. 저장 및 종료, 6. 종료");
+            System.out.println("               1. 맵, 2. 스탯, 3. 인벤토리, 4. 상점, 5. 저장, 6. 종료");
             blank();
             try {
                 select = sc.nextInt();
@@ -81,14 +81,12 @@ public class Sceen {
                     if (answer.equals("y") || answer.equals("Y")) {
                         PlayerJsonSaver.saveData(player);
                         InventoryJsonSaver.saveData(inventory);
-                        break;
                     } else {
                         System.out.println("저장을 취소합니다.");
                     }
                 } else {
                     PlayerJsonSaver.saveData(player);
                     InventoryJsonSaver.saveData(inventory);
-                    break;
                 }
             } else if (select == 6) {
                 System.out.println("종료");

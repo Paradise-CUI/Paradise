@@ -8,6 +8,11 @@ import setting.Inventory;
 import setting.Player;
 import setting.ZombieDefault;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
+
 /*
  * while로 죽을떄 까지 딜 주고 받기
  *
@@ -16,7 +21,7 @@ import setting.ZombieDefault;
 
 public class FightSceen {
     public static void fightSceen(int level, Player player, Inventory inventory) {
-
+        Scanner sc = new java.util.Scanner(System.in);
         ZombieDefault zombie = null;
 
         switch (level) { // zombie 객체 생성을 위한 switch 문
@@ -54,67 +59,98 @@ public class FightSceen {
             }
             System.out.println("좀비 HP : " + zombie.getHP()); // 좀비 HP 출력
             System.out.println("플레이어 HP : " + player.getHP()); // 플레이어 HP 출력
-            System.out.print(
-                    "\n" +
-                            "                                                                     ⠀⠀⠀⢀⠔⢂⣉⣠⣴⡗⡀⠀⠀⠀⠀⠀⠀⠀⢀⢾⣧⣦⣈⡁⠢⠀⠀⠀⠀\n" +
-                            "                                                                     ⠀⠀⣿⣾⣿⣿⣿⣿⣻⣼⣶⣶⣶⣶⣶⣶⣶⣧⣜⡿⣿⣿⣿⣿⣶⠀⠀⠀\n" +
-                            "                                                                     ⠀⠀⣽⢿⣿⣯⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣻⣿⣯⠀⠀⠀\n" +
-                            "⠀⠀⠀⠀⠀⠀⠀⢀⡆⠀⠀⠀⣀⡀⣀⣀⣰⣋⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀ ⠀⠀⣽⣾⢿⣿⡿⠛⣿⣿⡿⠻⣿⣿⣿⠛⢿⣿⣿⠟⣿⣿⡿⣷⣯⡀⠀⠀\n" +
-                            "⠀⠀⠀⢠⡀⠀⠀⡨⡖⠃⠉⠀⠀⠀⠀⠀⠀⠀⠈⠉⠓⠦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                     ⢀⠎⡿⡃⢘⠟⠁⢘⠌⠋⠀⠀⠈⠛⠁⠀⠈⠙⠃⠀⠈⠛⠃⠈⢻⠱⡀⠀\n" +
-                            "⠀⠀⠀⠀⠈⡷⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢯⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                     ⠀⠀⠀⠀⡼⠐⠊⠀⠀⠀⠀⠰⣪⣄⢄⡀⠀⠀⠀⠀⢀⣠⣤⠀⠀⠀⠀⠀⠀⠀⢰⠀\n" +
-                            "⠀⠀⠀⠀⡰⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                     ⠀⠀⠀⠀⠀⠀⠀⠰⠀⠀⠠⠀⠢⠬⠦⣾⣿⣿⠦⠥⡦⠤⢤⠤⠴⣿⣿⡶⠤⠤⠄⠀⠀⠀⠀⠆\n" +
-                            "⠀⠀⠀⠀⡇⠀⠆⠀⡠⠒⠋⠓⠢⡄⠀⠀⠀⢀⣀⣀⣀⠀⡸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                     ⠀⠀⠀⠀⡆⠀⠠⠊⠋⠀⠐⠐⢎⠿⠟⠀⠀⠀⠀⠀⠀⠀⠻⡿⠁⠀⠀⠀⠀⠀⠀⠀⠐\n" +
-                            "⠀⠀⠀⠀⢇⠀⠇⠀⡇⠀⢀⠀⠀⠈⡆⠀⢠⠏⠀⠀⠀⠉⢞⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                     ⠀⠀⠀⠁⠀⠀⠃⠀⡀⠀⢈⡐⣃⡄⠄⠂⠀⠀⠀⠐⠢⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                            "⠀⠀⠀⠀⠘⡄⠀⠀⢇⡀⠉⠀⠀⢸⠀⠀⢸⡀⠀⠀⠀⠁⡼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                     ⠀⠀⠀⠀⡀⠀⠂⠁⠈⠂⠌⠀⠈⡇⠀⠀⣤⠀⠀⠀⣀⡀⠀⠡⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                            "⠀⠀⠀⠀⠀⠘⣆⠀⠀⠙⠒⠒⠋⠀⠀⠀⡀⠫⠤⠤⢴⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                     ⠀⠀⠀⠀ ⢣⢜⢕⣳⡔⢨⠄⢀⠀⠀⠀⣾⣿⠇⠀⠀⣿⣷⠀⠀⠀⠀⠀⠀⣤⣦⣀⠀⡜\n" +
-                            "⠀⠀⠀⠀⠀⠰⣇⡀⠀⠀⠀⠀⠀⠀⠐⠃⠈⠃⠀⠀⢀⣸⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                     ⠀⠀⠀⠀⠫⣯⣼⣏⣑⢺⢇⠂⠄⠀⠛⠛⠀⠀⠀⠙⠛⠀⢠⠀⠀⠀⢐⣹⢏⢞⠔⠀\n" +
-                            "⠀⠀⠀⠀⠀⠀⠀⡇⠀⡤⢖⠒⠋⡇⠉⠉⠉⡝⠉⢱⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀⠀⠀⠀⠀⠀                     ⠀⠀⠀⠀⠀⠀⠈⠸⡹⣞⣟⡾⣯⢌⠦⣀⠀⠀⠀⠀⠀⣀⠴⣁⢡⢄⢈⣹⢟⠦⠋⠀⠀\n" +
-                            "⠀⠀⠀⠀⠀⠀⠀⡇⢸⡁⠙⠒⠒⣃⣠⠤⡄⠉⠉⠁⠀⠀⠀⠀⡴⠚⠉⢦⡔⠁⠀⠈⡇⣀⠄⠒⢦⡀⠀⠀                     ⠀⠀⠀⠀⠀⠈⠑⠉⡷⠞⣚⠿⠿⠾⠷⠶⠷⠾⠷⢶⣚⠛⢺⠙⠒⠁⠀⠀⠀⠀\n" +
-                            "⠀⠀⠀⠀⠀⠀⠀⡇⠀⠙⠦⠤⠤⠼⠤⠼⠤⠤⠤⠤⡤⢀⠔⠦⡇⠀⣀⣘⣁⣀⣀⣘⠃⠀⠀⠀⡣⣀⡤⣄                     ⠀⠀ ⠀⠀⠀⠀⠀⡠⣨⣈⠈⠂⠡⠤⠯⠯⠤⠽⠶⠤⠌⠑⠀⢁⠀⢂⠀⠀⠀\n" +
-                            "⠀⠀⠀⠀⠀⠀⠀⡨⢽⠳⠶⣒⠢⠤⠤⠤⢄⣀⣀⡼⠀⣫⡀⣀⠞⠁⣀⠀⠀⠀⠀⠀⠀⠉⠑⠦⡁⠀⠀⢱⠀                     ⠀  ⠀⠀⠀⠀⢌⣴⣿⡟⡠⣄⣴⣶⣶⣶⠄⠀⠀⡀⠀⠀⠀⠀⠀⠀⠡⡀⠀⠀⠀\n" +
-                            "⠀⠀⠀⢀⠤⠒⠁⠀⠰⣉⢉⠒⠠⣍⡛⡆⠀⠀⠀⠀⡏⠁⣰⠃⠀⠀⣿⠀⠀⠀⠀⢰⡇⠀⠀⠀⠈⡇⣴⣃⡀⠀    __   _____       ⠀⠀⢀⣢⣾⣿⣿⠠⣿⣿⣿⠿⠛⠁⠀⠀⠀⣏⡉⠀⠀⠀⢇⠀⠀⢐⠄⠀⠀\n" +
-                            "⠀⡠⠞⠁⠀⠀⠀⠀⠀⠀⡇⢄⠉⢩⠍⠁⠉⠒⣄⠀⠣⣤⡇⠀⡀⠀⠉⠀⠀⠀⠀⠀⠃⢰⠃⠀⠀⢸⠀⠀⠈⢇    \\ \\ / / __|      ⡠⠁⠈⠻⢿⠋⠜⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠀⠀⠘⡦⠔⠀⠈⢆⠀\n" +
-                            "⠀⡠⠞⠁⠀⠀⠀⠀⠀⠀⡇⢄⠉⢩⠍⠁⠉⠒⣄⠀⠣⣤⡇⠀⡀⠀⠉⠀⠀⠀⠀⠀⠃⢰⠃⠀⠀⢸⠀⠀⠈⢇     \\ V /\\__ \\      ⠣⡈⢈⠔⢺⠀⠼⣄⣄⣀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣕⠲⡋⢐⠜\n" +
-                            "⠘⢒⠀⠀⠀⠀⠀⠀⠀⠀⡏⠓⣜⢾⠀⢰⠀⠀⠀⡜⠀⡏⠀⡇⠀⠳⡄⠀⠀⠀⠀⠀⠀⠀⣨⠋⠁⠀⡇⣤⡤⠚      \\_/ |___/      ⠀⠀⠀⠁⡍⣉⡓⠓⠚⠂⠀⠤⠤⠀⠤⠄⠀⠀⠀⠐⠒⣀⠩⠜⠀⠀⠀⠀\n" +
-                            "⠀⠀⠃⠀⠀⠇⠀⠀⠀⠀⡗⢄⠀⣇⠀⠀⡇⠀⠀⡇⠀⠳⣄⢼⣶⡀⠀⠉⠒⠒⠒⠊⠉⠁⠀⠀⢠⡏⠀⠀⠙⡄                     ⠀⠀⠀⠀⢹⢽⡯⠻⢋⣭⣴⢔⢒⣖⡐⠀⡂⡈⠉⠋⠉⢡⣝⢀⠄⡀⠀⠀\n" +
-                            "⠀⢐⠀⠀⠀⡷⠁⠀⠀⠀⡏⠑⠊⡟⡄⠀⢇⠀⠀⡅⠀⠀⠀⣇⠀⠈⢉⡒⠒⠦⠤⠤⠒⢾⡅⠀⠈⡟⠲⠔⠁⠀                     ⠀⠀⠀⠀⠀⠹⡳⡟⡜⢾⡴⣘⢷⢬⠹⠗⡾⠐⠺⠀⡠⠬⣾⠾⢻⠆⠀⠀\n" +
-                            "⠀⢸⠀⠀⠀⡇⠀⠀⠀⢀⠗⠠⡀⠀⢣⠀⠀⣇⠀⢸⠀⠀⠀⠀⠑⠒⠋⠳⣀⣀⠟⣄⣀⡴⠋⠙⠛⠓⠋⠀⠀                     ⠀⠀⠀⠀⠀⠀⠀⢓⠼⣿⣾⣚⠂⠹⠓⠆⡤⣴⠖⠀⠀⠻⠉⠈⠻⢵⣤⣀⡤\n" +
-                            "⠀⢸⠀⠀⠀⡇⠀⠀⠀⢸⡐⠆⡀⠑⠢⣳⠀⢱⠀⠘⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⡀⢑⠀⠀⠀⠀⠀                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⢉⢛⢯⢾⠡⡇⠀⢰⢙⡍⡡⠀⠘⠇⠀⠀⠀⠀⠀⠀⠀\n" +
-                            "⠀⢸⠀⠀⠀⡇⠀⠀⠀⠀⠈⢦⠀⠈⢢⠃⠀⠀⢱⠀⢸⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡎⠀⡇⠀⠀⠀⠀⠀                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡦⡛⠈⠀⢪⠇⠀⠘⣸⠏⠆⠐⢳⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                            "⠀⢸⠀⠀⠀⢳⠀⠀⠀⠀⠀⠀⠈⢆⡎⠀⠀⠀⠀⢳⠀⢿⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⠃⢸⠀⠀⠀⠀⠀⠀                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡉⣓⢉⡡⠀⠀⠀⢌⠉⣴⣉⡈⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                            "                                                                                                      \n" +
-                            "⠀                                                                                                     \n");
-//            switch (level) {
-//                case 6:
-//                    System.out.println("하급 좀비와 싸우는 중");
-//                    break;
-//                case 5:
-//                case 4:
-//                    System.out.println("중급 좀비와 싸우는 중");
-//                    break;
-//                case 3:
-//                    System.out.println("상급 좀비와 싸우는 중");
-//                    break;
-//                case 2:
-//                    System.out.println("감염 좀비와 싸우는 중");
-//                    break;
-//                case 1:
-//                    System.out.println("보스 좀비와 싸우는 중");
-//                    break;
-//            } // switch close
 
-            if (player.getSpecialAttack() && attack / 5 == 0) { // 특수공격이 활성화가 되어있고 공격의 5번이 되었다면
-                zombie.minusHP((player.getDAMAGE() * 3)); // 특수공격이 활성화가 되어있다면 3배의 데미지를 줌
+            switch (level) { // 좀비의 레벨에 따른 출력
+                case 6:
+                    try {
+                        String LowZombie = new String(Files.readAllBytes(Paths.get("Art/Zombie/LowZombie.txt")));
+                        System.out.println(LowZombie); // 파일 내용 출력
+                    } catch (IOException e) {
+                        System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                    }
+                    break;
+                case 5:
+                case 4:
+                    try {
+                        String IntermediateZombie = new String(Files.readAllBytes(Paths.get("Art/Zombie/IntermediateZombie.txt")));
+                        System.out.println(IntermediateZombie); // 파일 내용 출력
+                    } catch (IOException e) {
+                        System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                    }
+                    break;
+                case 3:
+                    try {
+                        String SuperiorityZombie = new String(Files.readAllBytes(Paths.get("Art/Zombie/SuperiorityZombie.txt")));
+                        System.out.println(SuperiorityZombie); // 파일 내용 출력
+                    } catch (IOException e) {
+                        System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                    }
+                    break;
+                case 2:
+                    try {
+                        String InfecteZombie = new String(Files.readAllBytes(Paths.get("Art/Zombie/InfecteZombie.txt")));
+                        System.out.println(InfecteZombie); // 파일 내용 출력
+                    } catch (IOException e) {
+                        System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                    }
+                    break;
+                case 1:
+                    try {
+                        String BossZombie = new String(Files.readAllBytes(Paths.get("Art/Zombie/BossZombie.txt")));
+                        System.out.println(BossZombie); // 파일 내용 출력
+                    } catch (IOException e) {
+                        System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                    }
+                    break;
+            } // switch close
+
+            System.out.println("1. 공격 2. 포션사용 3. 도망가기");
+            int select = 0;
+            while (true) {
+                try {
+                    select = sc.nextInt();
+                    break;
+                } catch (Exception e) {
+                    System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+                }
+            }
+
+            if (select == 1) { // 공격을 했을 때
+                if (player.getSpecialAttack() && attack / 5 == 0) { // 특수공격이 활성화가 되어있고 공격의 5번이 되었다면
+                    zombie.minusHP((player.getDAMAGE() * 3)); // 특수공격이 활성화가 되어있다면 3배의 데미지를 줌
+                    System.out.println("특수공격을 사용하였습니다.");
+                    System.out.println("입힌 데미지 : " + (player.getDAMAGE() * 3));
+                } else {
+                    zombie.minusHP(player.getDAMAGE()); // 플레이어가 좀비에게 데미지를 줌
+                    System.out.println("입힌 데미지 : " + player.getDAMAGE());
+                }
+            } else if (select == 2) { // 포션을 사용했을 때
+                if (inventory.allPotion()) { // 포션이 있다면
+                    inventory.print(player); // 포션 출력
+                    continue;
+                } else {
+                    System.out.println("포션이 없습니다.");
+                }
+            } else if (select == 3) { // 도망가기
+                System.out.println("도망가기");
+                break;
+
             } else {
-                zombie.minusHP(player.getDAMAGE()); // 플레이어가 좀비에게 데미지를 줌
+                System.out.println("잘못된 입력입니다.");
+                continue;
             }
 
             player.minusHP((zombie.getDAMAGE() / (int) player.getRating())); // 좀비가 플레이어에게 데미지를 줌
             player.plusInfectiousness(zombie.getINFECTIOUSNESS()); // 좀비가 플레이어에게 감염율을 줌
 
+            // 엔딩
             if (player.getHP() <= 0) { // 플레이어가 죽었을 때
                 DieEnding.dieending(); // 다이 엔딩 띄우기
+            } else if (player.getInfectiousness() >= 100) { // 플레이어가 감염되었을 때
+                InfecteEnding.infecteending(); // 감염 엔딩 띄우기
             }
+
+
             if (zombie.getHP() <= 0) { // 좀비가 죽었을 때
                 System.out.println("정상적으로 좀비가 죽었습니다.");
                 if (zombie.dropPotion() == 3 || zombie.dropPotion() == 2 || zombie.dropPotion() == 1) { // 좀비가 포션을 드랍했을 때

@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class InventoryJsonSaver {
-    private static final String FILE_PATH = "db/InventoryData.json";
+    private static final String FILE_PATH = "DB/InventoryData.json";
 
     public static void saveData(Inventory inventory) {
         Gson gson = new Gson();

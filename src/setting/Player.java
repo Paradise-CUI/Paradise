@@ -9,24 +9,26 @@ public class Player {
     double rating; // 지지율
     double Infectiousness; // 감염율
     String Weapon; // 무기
+    int maxHP;
 
 
     public Player() { // 플레이어 기본 세팅
         this.kill = 0;
         this.Money = 400; // 400
+        this.maxHP = 300;
         this.HP = 300;
         this.DAMAGE = 34.0;
         this.SpecialAttack = false;
         this.rating = 1.0;
         this.Infectiousness = 0.0;
         this.Weapon = "맨손";
-        System.out.println("플레이어 객체 생성 완료");
     }
 
     // 현재 상태 출력
     public void print() {
         nextText();
         System.out.println("                             MONEY : " + this.Money);
+        System.out.println("                           최대 채력 : " + this.maxHP);
         System.out.println("                                HP : " + this.HP);
         System.out.println("                            DAMEGE : " + this.DAMAGE);
         System.out.println("                            WEAPON : " + this.Weapon);
@@ -52,8 +54,13 @@ public class Player {
     }
 
     public void plusHP(int HP) {
-        this.HP += HP;
+        if (this.HP + HP > this.maxHP) {
+            this.HP = this.maxHP;
+        } else {
+            this.HP += HP;
+        }
     }
+
 
     public void plusDamage(double DAMAGE) {
         this.DAMAGE += DAMAGE;
@@ -63,8 +70,28 @@ public class Player {
         this.rating += rating;
     }
 
+
     public void plusInfectiousness(double Infectiousness) {
-        this.Infectiousness += Infectiousness;
+        if (this.Infectiousness + Infectiousness > 100) {
+            setInfectiousness(100);
+        } else {
+            this.Infectiousness += Infectiousness;
+        }
+    }
+
+    public void plusMaxHP(int maxHP) {
+        this.maxHP += maxHP;
+    }
+
+    public boolean testPlusHP() { // 체력 증가 테스트
+        boolean result = false;
+        for (int i = 1; i <= 10; i++) {
+            if (getMaxHP() == (getHP() + i)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
 
@@ -114,6 +141,10 @@ public class Player {
         return this.rating;
     }
 
+    public int getMaxHP() {
+        return this.maxHP;
+    }
+
     // 설정
     public void setSpecialAttack(boolean SpecialAttack) {
         this.SpecialAttack = SpecialAttack;
@@ -125,6 +156,14 @@ public class Player {
 
     public void setWeapon(String Weapon) {
         this.Weapon = Weapon;
+    }
+
+    public void setHP(int HP) {
+        this.Money = HP;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
 

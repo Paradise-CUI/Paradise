@@ -1,6 +1,5 @@
 package Shop;
 
-import setting.Inventory;
 import setting.Player;
 
 import java.util.Scanner;
@@ -22,7 +21,8 @@ public class StatsShop {
             if (select == 1) {
                 if (haveMoney(player, select)) {
                     player.minusMoney(statsPrice[select - 1]);
-                    player.plusHP(100);
+                    player.plusMaxHP(100);
+                    player.setHP(player.getMaxHP());
                     System.out.println("                  HP를 100 증가하셨습니다.");
                     blank();
                     sec2();
@@ -65,6 +65,11 @@ public class StatsShop {
                     }
                 }
             } else if (select == 4) {
+                if (Rating(player)) {
+                    System.out.println("                 이미 지지율이 100입니다.");
+                    sec1();
+                    break;
+                }
                 if (haveMoney(player, select)) {
                     player.minusMoney(statsPrice[select - 1]);
                     player.plusRating(1);
@@ -97,9 +102,16 @@ public class StatsShop {
 
     public static boolean haveMoney(Player player, int select) {
         if (player.getMoney() >= statsPrice[select - 1]) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
+    }
+
+    public static boolean Rating(Player player) {
+        if (player.getRating() >= 100) {
+            return false;
+        }
+        return true;
     }
 
     private static void blank() {

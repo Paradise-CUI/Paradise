@@ -52,6 +52,7 @@ public class Inventory {
         System.out.println("                    2. 중형 포션 : " + this.MiddlePotion);
         System.out.println("                    3. 대형 포션 : " + this.HighPotion);
         System.out.println("                      4. 백신 : " + this.vaccine);
+        System.out.println("                    0. 포션 사용 종료");
         blank();
         potionSelect(player);
     }
@@ -65,47 +66,78 @@ public class Inventory {
                 System.out.println("잘못된 입력입니다. 정수만 입력해주세요.");
                 sc.nextLine();
             }
-            if (select == 1) {
-                if (this.LowerPotion > 0) {
-                    this.LowerPotion--;
-                    player.plusHP(potionHeal[0]);
-                    break;
-                } else {
-                    System.out.println("소형 포션이 부족합니다.");
-                    break;
-                }
-            } else if (select == 2) {
-                if (this.MiddlePotion > 0) {
-                    this.MiddlePotion--;
-                    player.plusHP(potionHeal[1]);
-                    break;
-                } else {
-                    System.out.println("중형 포션이 부족합니다.");
-                    break;
-                }
-            } else if (select == 3) {
-                if (this.HighPotion > 0) {
-                    this.HighPotion--;
-                    player.plusHP(potionHeal[2]);
-                    break;
-                } else {
-                    System.out.println("대형 포션이 부족합니다.");
-                    break;
-                }
-            } else if (select == 4) {
-                if (this.vaccine > 0) {
-                    this.vaccine--;
-                    player.minusInfectiousness(5.0);
-                    if (player.getInfectiousness() < 0) {
-                        player.setInfectiousness(0);
+            if (select == 0) {
+                System.out.println("포션 사용을 종료합니다.");
+                break;
+            } else if (select == 1 || select == 2 || select == 3 || select == 4) {
+                if (canPotion(player)) {
+                    if (select == 1) {
+                        if (this.LowerPotion > 0) {
+                            if (player.testPlusHP()) {
+                                System.out.println("포션 사용시 체력이 10이하로 찹니다. 사용하시겠습니까? (y/n)");
+                                char YorN = sc.next().charAt(0);
+                                if (YorN == 'n' || YorN == 'N') {
+                                    break;
+                                }
+                            }
+                            this.LowerPotion--;
+                            player.plusHP(potionHeal[0]);
+                            break;
+                        } else {
+                            System.out.println("소형 포션이 부족합니다.");
+                            break;
+                        }
+                    } else if (select == 2) {
+                        if (this.MiddlePotion > 0) {
+                            if (player.testPlusHP()) {
+                                System.out.println("포션 사용시 체력이 10이하로 찹니다. 사용하시겠습니까? (y/n)");
+                                char YorN = sc.next().charAt(0);
+                                if (YorN == 'n' || YorN == 'N') {
+                                    break;
+                                }
+                            }
+                            this.MiddlePotion--;
+                            player.plusHP(potionHeal[1]);
+                            break;
+                        } else {
+                            System.out.println("중형 포션이 부족합니다.");
+                            break;
+                        }
+                    } else if (select == 3) {
+                        if (this.HighPotion > 0) {
+                            if (player.testPlusHP()) {
+                                System.out.println("포션 사용시 체력이 10이하로 찹니다. 사용하시겠습니까? (y/n)");
+                                char YorN = sc.next().charAt(0);
+                                if (YorN == 'n' || YorN == 'N') {
+                                    break;
+                                }
+                            }
+                            this.HighPotion--;
+                            player.plusHP(potionHeal[2]);
+                            break;
+                        } else {
+                            System.out.println("대형 포션이 부족합니다.");
+                            break;
+                        }
+                    } else if (select == 4) {
+                        if (this.vaccine > 0) {
+                            this.vaccine--;
+                            player.minusInfectiousness(5.0);
+                            if (player.getInfectiousness() < 0) {
+                                player.setInfectiousness(0);
+                            }
+                            break;
+                        } else {
+                            System.out.println("백신이 부족합니다.");
+                            break;
+                        }
                     }
-                    break;
                 } else {
-                    System.out.println("백신이 부족합니다.");
+                    System.out.println("포션 사용시 체력이 똑같습니다.");
                     break;
                 }
             } else {
-                System.out.println("잘못된 입력입니다.");
+                System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
             }
         }
     }
@@ -131,7 +163,13 @@ public class Inventory {
         this.allPotion = this.LowerPotion + this.MiddlePotion + this.HighPotion + this.vaccine;
         return this.allPotion > 0;
     }
-
+    public boolean canPotion(Player player) {
+        if (player.getMaxHP() == player.getHP()) {
+            System.out.println("이미 최대 체력입니다.");
+            return false;
+        }
+        return true;
+    }
 
     // 공백 추가
     private static void blank() {

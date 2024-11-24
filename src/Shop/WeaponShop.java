@@ -1,8 +1,10 @@
 package Shop;
 
 import setting.Player;
-import Shop.image.*;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class WeaponShop {
@@ -16,6 +18,8 @@ public class WeaponShop {
 
     public static void weapon(Player player) {
         int select = 0;
+        int get = -1;
+        boolean Break = false;
         while (true) {
             print();
             try {
@@ -24,6 +28,28 @@ public class WeaponShop {
                 System.out.println("잘못된 입력입니다. 정수만 입력해주세요.");
                 sc.nextLine();
             }
+
+            for (int i = 0; i < weapon.length; i++) {
+                if (weapon[i].equals(weapon[select - 1])) {
+                    get = i;
+                }
+                for (int j = 0; j < get; j++) {
+                    if (!haveWeapon[j]) {
+                        System.out.println("이전 무기를 구매해주세요.");
+                        sec1();
+                        Break = true;
+                        break;
+                    }
+                }
+                if (Break) {
+                    break;
+                }
+            }
+
+            if (Break) {
+                break;
+            }
+
             if (select == 1) {
                 if (! (haveWeapon[select - 1])) {
                     if (haveMoney(player, select)) {
@@ -32,7 +58,12 @@ public class WeaponShop {
                         player.plusDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("                        도끼를 구매하셨습니다.");
-                        axe.axe();
+                        try {
+                            String Axe = new String(Files.readAllBytes(Paths.get("Art/Weapon/Axe.txt")));
+                            System.out.println(Axe); // 파일 내용 출력
+                        } catch (IOException e) {
+                            System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                        }
                         miniblank();
                         sec2();
                         break;
@@ -54,7 +85,12 @@ public class WeaponShop {
                         player.plusDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("                 후라이팬을 구매하셨습니다.");
-                        pan.pan();
+                        try {
+                            String Pan = new String(Files.readAllBytes(Paths.get("Art/Weapon/Pan.txt")));
+                            System.out.println(Pan); // 파일 내용 출력
+                        } catch (IOException e) {
+                            System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                        }
                         miniblank();
                         sec2();
                         break;
@@ -76,7 +112,12 @@ public class WeaponShop {
                         player.plusDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("             대검을 구매하셨습니다.");
-                        sword.sword();
+                        try {
+                            String Sword = new String(Files.readAllBytes(Paths.get("Art/Weapon/Sword.txt")));
+                            System.out.println(Sword); // 파일 내용 출력
+                        } catch (IOException e) {
+                            System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                        }
                         sec2();
                         break;
                     } else {
@@ -97,7 +138,12 @@ public class WeaponShop {
                         player.plusDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("                   쇠뇌를 구매하셨습니다.");
-                        crossbow.crossbow();
+                        try {
+                            String Crossbow = new String(Files.readAllBytes(Paths.get("Art/Weapon/Crossbow.txt")));
+                            System.out.println(Crossbow); // 파일 내용 출력
+                        } catch (IOException e) {
+                            System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                        }
                         blank();
                         sec2();
                         break;
@@ -119,7 +165,12 @@ public class WeaponShop {
                         player.plusDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("                    권총을 구매하셨습니다.");
-                        pistol.pistol();
+                        try {
+                            String Pistol = new String(Files.readAllBytes(Paths.get("Art/Weapon/Pistol.txt")));
+                            System.out.println(Pistol); // 파일 내용 출력
+                        } catch (IOException e) {
+                            System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                        }
                         blank();
                         sec2();
                         break;
@@ -141,7 +192,12 @@ public class WeaponShop {
                         player.plusDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("                    샷건을 구매하셨습니다.");
-                        shotgun.shotgun();
+                        try {
+                            String Shotgun = new String(Files.readAllBytes(Paths.get("Art/Weapon/Shotgun.txt")));
+                            System.out.println(Shotgun); // 파일 내용 출력
+                        } catch (IOException e) {
+                            System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                        }
                         miniblank();
                         sec2();
                         break;
@@ -163,7 +219,12 @@ public class WeaponShop {
                         player.plusDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("                     소총을 구매하셨습니다.");
-                        gun.gun();
+                        try {
+                            String Gun = new String(Files.readAllBytes(Paths.get("Art/Weapon/Gun.txt")));
+                            System.out.println(Gun); // 파일 내용 출력
+                        } catch (IOException e) {
+                            System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                        }
                         miniblank();
                         sec2();
                         break;
@@ -185,7 +246,12 @@ public class WeaponShop {
                         player.plusDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("                  저격총을 구매하셨습니다.");
-                        sniper.sniper();
+                        try {
+                            String Sniper = new String(Files.readAllBytes(Paths.get("Art/Weapon/Sniper.txt")));
+                            System.out.println(Sniper); // 파일 내용 출력
+                        } catch (IOException e) {
+                            System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                        }
                         miniblank();
                         sec2();
                         break;

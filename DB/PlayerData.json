@@ -1,1 +1,11 @@
-{"kill":0,"Money":400,"HP":300,"DAMAGE":34.0,"SpecialAttack":false,"rating":1.0,"Infectiousness":0.0,"Weapon":"맨손"}
+{
+  "kill": 0,
+  "Money": 400,
+  "HP": 289,
+  "DAMAGE": 34.0,
+  "SpecialAttack": false,
+  "rating": 1.0,
+  "Infectiousness": 0.0,
+  "Weapon": "맨손",
+  "maxHP": 300
+}
