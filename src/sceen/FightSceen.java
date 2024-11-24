@@ -59,7 +59,7 @@ public class FightSceen {
                 System.out.println("턴 : " + attack); // 턴 출력
             }
 
-            System.out.println("플레이어 HP : " + player.getHP() +  "       좀비 HP : " + zombie.getHP()); // 플레이어 HP 출력 및 좀비 HP 출력
+            System.out.println("플레이어 HP : " + player.getHP() +  "       좀비 HP : " + zombie.getHP() + "          감염율 : " + player.getInfectiousness()); // 플레이어 HP 출력 및 좀비 HP 출력
 
             switch (level) { // 좀비의 레벨에 따른 출력
                 case 6:
@@ -151,7 +151,7 @@ public class FightSceen {
             if (player.getHP() <= 0) { // 플레이어가 죽었을 때
                 SacrificeEnding.sacrificeEnding(); // 다이 엔딩 띄우기
             } else if (player.getInfectiousness() >= 100) { // 플레이어가 감염되었을 때
-                InfecteEnding.infecteending(); // 감염 엔딩 띄우기
+                InfecteEnding.infecteEnding(); // 감염 엔딩 띄우기
             }
 
             if (zombie.getHP() <= 0) { // 좀비가 죽었을 때
@@ -166,6 +166,7 @@ public class FightSceen {
                 System.out.println("돈이 증가하였습니다." + zombie.getMONEY() + "원");
                 System.out.println(player.getKill() + "킬");
                 System.out.println(player.getMoney() + "원");
+                player.plusRating(0.25);
 
                 if (level == 1) {
                     Ending.ending(player);

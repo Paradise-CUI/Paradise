@@ -4,23 +4,23 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class InfecteEnding {
-    public static void infecteEnding() {
-        System.out.println("                 당신은 좀비와 싸우다 뒤에서 오는 좀비에게 감염되었습니다.");
+public class SacrificeEnding {
+    public static void sacrificeEnding() {
+        System.out.println("                 당신은 좀비들과 격렬히 싸우다 죽었습니다.");
         blank();
         sec3();
         nextText();
-        System.out.println("                         이제 지구는 종말에 길로 들어섭니다.");
+        System.out.println("                   이제 지구는 종말에 길로 들어섭니다.");
         blank();
         sec3();
         nextText();
-        System.out.println("                              SAD ENDING (2)");
+        System.out.println("                          SAD ENDING (1)");
         blank();
         sec3();
         nextText();
         try {
-            String Infecte = new String(Files.readAllBytes(Paths.get("Art/Ending/Infecte.txt")));
-            System.out.println(Infecte); // 파일 내용 출력
+            String Sacrifice = new String(Files.readAllBytes(Paths.get("Art/Ending/Sacrifice.txt")));
+            System.out.println(Sacrifice); // 파일 내용 출력
         } catch (IOException e) {
             System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
         }
