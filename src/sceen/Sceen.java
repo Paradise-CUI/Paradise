@@ -16,6 +16,8 @@ import static choice.MainSceenChoice.countinue;
 public class Sceen {
     public static void sceen() {
         Scanner sc = new Scanner(System.in);
+        String[] weapon = {"도끼", "후라이팬", "대검", "쇠뇌", "권총", "샷건", "소총", "저격총"};
+        double[] damage = {20.0, 30.0, 60.0, 100.0, 300.0, 700.0, 800.0, 1000.0};
         Player player = null;
         Inventory inventory = null;
         if (countinue) {
@@ -41,6 +43,7 @@ public class Sceen {
             } catch (Exception e) {
                 System.out.println("잘못된 입력입니다. 정수만 입력해주세요.");
                 sc.nextLine();
+                continue;
             }
             if (select == 1) {
                 Map.map();
@@ -58,6 +61,7 @@ public class Sceen {
                     } catch (Exception e) {
                         System.out.println("잘못된 입력입니다. 정수만 입력해주세요.");
                         sc.nextLine();
+                        continue;
                     }
                     if (shopchoice == 1 || shopchoice == 2 || shopchoice == 3) {
                     } else if (shopchoice == 0) {
@@ -88,6 +92,7 @@ public class Sceen {
                     PlayerJsonSaver.saveData(player);
                     InventoryJsonSaver.saveData(inventory);
                 }
+                sec3();
             } else if (select == 6) {
                 System.out.println("종료");
                 break;

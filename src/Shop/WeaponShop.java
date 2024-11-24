@@ -19,7 +19,9 @@ public class WeaponShop {
     public static void weapon(Player player) {
         int select = 0;
         int get = -1;
+        int changeTrue = -1;
         boolean Break = false;
+        String PlayerWeapon = player.getWeapon();
         while (true) {
             print();
             try {
@@ -27,13 +29,38 @@ public class WeaponShop {
             } catch (Exception e) {
                 System.out.println("잘못된 입력입니다. 정수만 입력해주세요.");
                 sc.nextLine();
+                continue;
             }
 
-            for (int i = 0; i < weapon.length; i++) {
+             if (select == 0) {
+                 System.out.println("상점을 종료합니다.");
+                 sec1();
+                 break;
+             }
+
+             if (select < 0 || select > 8) {
+                 System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+                 sec1();
+                 nextText();
+                 continue;
+             }
+
+            for (int i = 0; i < weapon.length; i++) { // 플레이어의 현재 무기의 인덱스 찾기
+                if (weapon[i].equals(PlayerWeapon)) {
+                    changeTrue = i;
+                }
+            }
+
+            for (int i = 0; i <= changeTrue; i++) { // 선택한 무기 이전 무기까지 구매 여부 확인
+                haveWeapon[i] = true;
+            }
+
+            for (int i = 0; i < weapon.length; i++) { // 선택한 무기의 인덱스 찾기
                 if (weapon[i].equals(weapon[select - 1])) {
                     get = i;
                 }
-                for (int j = 0; j < get; j++) {
+
+                for (int j = 0; j < get; j++) { // 선택한 무기 이전 무기까지 구매 여부 확인
                     if (!haveWeapon[j]) {
                         System.out.println("이전 무기를 구매해주세요.");
                         sec1();
@@ -265,10 +292,6 @@ public class WeaponShop {
                     sec1();
                     break;
                 }
-            } else if (select == 0) {
-                System.out.println("상점을 종료합니다.");
-                sec1();
-                break;
             } else {
                 System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
                 sec1();

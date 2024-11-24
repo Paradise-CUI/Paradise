@@ -17,7 +17,20 @@ public class StatsShop {
             } catch (Exception e) {
                 System.out.println("잘못된 입력입니다. 정수만 입력해주세요.");
                 sc.nextLine();
+                continue;
             }
+
+            if (select == 0) {
+                System.out.println("                       상점을 종료합니다.");
+                break;
+            }
+
+            if (select < 0 || select > 4) {
+                System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+                sec1();
+                continue;
+            }
+
             if (select == 1) {
                 if (haveMoney(player, select)) {
                     player.minusMoney(statsPrice[select - 1]);
@@ -82,9 +95,6 @@ public class StatsShop {
                     sec1();
                     break;
                 }
-            } else if (select == 0) {
-                System.out.println("                       상점을 종료합니다.");
-                break;
             } else {
                 System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
             }
@@ -102,16 +112,16 @@ public class StatsShop {
 
     public static boolean haveMoney(Player player, int select) {
         if (player.getMoney() >= statsPrice[select - 1]) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     public static boolean Rating(Player player) {
         if (player.getRating() >= 100) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     private static void blank() {

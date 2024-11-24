@@ -1,24 +1,84 @@
 package sceen;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
+
 // 튜토리얼을 위한 씬 생성
 
 public class TutorialSceen {
     public static void tutorial() {
-        System.out.println("게임방법");
-        System.out.println("당신의 목표는 대통령이 되는 것 입니다.");
-        System.out.println("당신은 여러 지역 중 하나의 도시를 선택할 수 있습니다. (각 도시마다 몬스터 스폰이 다릅니다.)");
-        System.out.println("서울 : 보스 좀비, 제주 : 감염 좀비, 광양 : 상급 좀비, 부산 : 중급 좀비, 대전 : 중급 좀비, 대구 : 하급 좀비");
-        System.out.println("만약 서울을 선택하면 서울로 이동합니다.");
-        System.out.println("서울에서는 보스 좀비와 전투를 할 수 있습니다.");
-        System.out.println("전투에서는 ");
-        System.out.println("각각 50, 100, 200, 500, 10000골드가 드랍됩니다.");
-        System.out.println("코인으로 상점에서 포션과 무기 스텟이 구매 가능합니다.");
-        System.out.println("포션은 체력을 회복하고 무기는 공격력을 올립니다.");
-        System.out.println("각 도시에서는 1번의 전투가 가능합니다.");
-        System.out.println("1번의 전투가 끝나면 메인화면으로 이동합니다.");
-        sec10();
-        System.out.println("게임을 시작합니다.");
-        sec2();
+        Scanner sc = new Scanner(System.in);
+        int select = 0;
+
+
+
+        while (true) {
+            nextText();
+            System.out.println("               1. 맵, 2. 스탯, 3. 인벤토리, 4. 상점, 5. 저장, 6. 로드, 7. 나가기");
+            blank();
+            try {
+                select = sc.nextInt();
+            } catch (Exception e) {
+                System.out.println("잘못된 입력입니다. 정수만 입력해주세요.");
+                sc.nextLine();
+                continue;
+            }
+            nextText();
+            if (select == 1) {
+                try {
+                    String Map = new String(Files.readAllBytes(Paths.get("Art/Tutorial/Map.txt")));
+                    System.out.println(Map); // 파일 내용 출력
+                } catch (IOException e) {
+                    System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                }
+            } else if (select == 2) {
+                try {
+                    String Status = new String(Files.readAllBytes(Paths.get("Art/Tutorial/Status.txt")));
+                    System.out.println(Status); // 파일 내용 출력
+                } catch (IOException e) {
+                    System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                }
+            } else if (select == 3) {
+                try {
+                    String Inventory = new String(Files.readAllBytes(Paths.get("Art/Tutorial/Inventory.txt")));
+                    System.out.println(Inventory); // 파일 내용 출력
+                } catch (IOException e) {
+                    System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                }
+            } else if (select == 4) {
+                try {
+                    String Shop = new String(Files.readAllBytes(Paths.get("Art/Tutorial/Shop.txt")));
+                    System.out.println(Shop); // 파일 내용 출력
+                } catch (IOException e) {
+                    System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                }
+            } else if (select == 5) {
+                try {
+                    String Save = new String(Files.readAllBytes(Paths.get("Art/Tutorial/Save.txt")));
+                    System.out.println(Save); // 파일 내용 출력
+                } catch (IOException e) {
+                    System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                }
+            } else if (select == 6) {
+                try {
+                    String Load = new String(Files.readAllBytes(Paths.get("Art/Tutorial/Load.txt")));
+                    System.out.println(Load); // 파일 내용 출력
+                } catch (IOException e) {
+                    System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());
+                }
+            } else if (select == 7) {
+                break;
+            } else {
+                System.out.println("잘못된 입력입니다.");
+                continue;
+            }
+            System.out.println("                       10초 후에 자동으로 튜토리얼 화면으로 돌아갑니다.");
+            blank();
+            sec10();
+        }
+
     }
 
     // 10초 대기
@@ -27,6 +87,18 @@ public class TutorialSceen {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void nextText() {
+        for (int i = 0; i < 100; i++) {
+            System.out.println();
+        }
+    }
+
+    private static void blank() {
+        for (int i = 0; i < 15; i++) {
+            System.out.println();
         }
     }
 

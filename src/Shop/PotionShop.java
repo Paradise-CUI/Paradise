@@ -19,7 +19,21 @@ public class PotionShop {
             } catch (Exception e) {
                 System.out.println("잘못된 입력입니다. 정수만 입력해주세요.");
                 sc.nextLine();
+                continue;
             }
+
+            if (select == 0) {
+                System.out.println("                                 상점을 종료합니다.");
+                sec1();
+                break;
+            }
+
+            if (select < 0 || select > 3) {
+                System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+                sec1();
+                continue;
+            }
+
             if (select == 1) {
                 if (haveMoney(player, select)) {
                     player.minusMoney(potionPrice[select - 1]);
@@ -59,10 +73,6 @@ public class PotionShop {
                     sec1();
                     break;
                 }
-            } else if (select == 0) {
-                System.out.println("                                 상점을 종료합니다.");
-                sec1();
-                break;
             } else {
                 System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
                 sec1();

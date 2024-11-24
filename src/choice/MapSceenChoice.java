@@ -18,6 +18,11 @@ public class MapSceenChoice {
             sc.nextLine();
         }
 
+        if (choice < 1 || choice > 6) {
+            System.out.printf("잘못된 입력입니다.");
+        }
+
+
         if (choice == 1) {
             Seoul.seoul(player, inventory);
         } else if (choice == 2) {
@@ -33,5 +38,6 @@ public class MapSceenChoice {
         } else {
             System.out.println("잘못된 입력입니다.");
         }
+
     }
 }

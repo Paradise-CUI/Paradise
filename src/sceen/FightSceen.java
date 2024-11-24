@@ -21,9 +21,11 @@ import java.util.Scanner;
  * */
 
 public class FightSceen {
+    public static boolean Exit = false;
     public static void fightSceen(int level, Player player, Inventory inventory) {
         Scanner sc = new java.util.Scanner(System.in);
         ZombieDefault zombie = null;
+        Exit = false;
 
         switch (level) { // zombie 객체 생성을 위한 switch 문
             case 6:
@@ -52,9 +54,6 @@ public class FightSceen {
 
         int attack = 1; // 특수공격 사용을 위한 몇번의 공격을 했는지 확인
         while (! (zombie.getHP() <= 0 || player.getHP() <= 0)) { // 좀비의 피가 0이 되거나 사람이 피가 0이 될떄까지
-            if (attack == 6) { // 특수공격 사용으로 인한 attack 초기화 (5번 마다)
-                attack = 1;
-            }
             if (player.getSpecialAttack()) {
                 System.out.println("턴 : " + attack); // 턴 출력
             }
@@ -105,7 +104,7 @@ public class FightSceen {
                     break;
             } // switch close
 
-            System.out.println("1. 공격 2. 포션사용 3. 도망가기");
+            System.out.println("                       1. 공격 2. 포션사용 3. 도망가기");
             int select = 0;
             while (true) {
                 try {
@@ -113,17 +112,20 @@ public class FightSceen {
                     break;
                 } catch (Exception e) {
                     System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+                    sc.nextLine();
+                    continue;
                 }
             }
 
             if (select == 1) { // 공격을 했을 때
-                if (player.getSpecialAttack() && attack / 5 == 0) { // 특수공격이 활성화가 되어있고 공격의 5번이 되었다면
+                if (player.getSpecialAttack() && attack % 5 == 0) { // 특수공격이 활성화가 되어있고 공격의 5번이 되었다면
                     zombie.minusHP((int)((player.getDAMAGE() + player.getWeaponDamage()) * 3)); // 특수공격이 활성화가 되어있다면 3배의 데미지를 줌
-                    System.out.println("특수공격을 사용하였습니다.");
-                    System.out.println("입힌 데미지 : " + (int)((player.getDAMAGE() + player.getWeaponDamage()) * 3));
+                    System.out.println("                  특수공격을 사용하였습니다.");
+                    System.out.println("                      입힌 데미지 : " + (int)((player.getDAMAGE() + player.getWeaponDamage()) * 3));
+                    attack = 0;
                 } else {
                     zombie.minusHP(player.getDAMAGE()); // 플레이어가 좀비에게 데미지를 줌
-                    System.out.println("입힌 데미지 : " + (int)(player.getDAMAGE() + player.getWeaponDamage()));
+                    System.out.println("                      입힌 데미지 : " + (int)(player.getDAMAGE() + player.getWeaponDamage()));
                 }
             } else if (select == 2) { // 포션을 사용했을 때
                 if (inventory.allPotion()) { // 포션이 있다면
@@ -135,6 +137,7 @@ public class FightSceen {
             } else if (select == 3) { // 도망가기
                 System.out.println("도망가기");
                 player.setHP(1);
+                Exit = true;
                 break;
 
             } else {
@@ -143,7 +146,7 @@ public class FightSceen {
             }
 
             player.minusHP((zombie.getDAMAGE() / (int) player.getRating())); // 좀비가 플레이어에게 데미지를 줌
-            System.out.println("받은 데미지 : " + (zombie.getDAMAGE() / (int) player.getRating()));
+            System.out.println("                      받은 데미지 : " + (zombie.getDAMAGE() / (int) player.getRating()));
             player.plusInfectiousness(zombie.getINFECTIOUSNESS()); // 좀비가 플레이어에게 감염율을 줌
 
 
@@ -155,15 +158,15 @@ public class FightSceen {
             }
 
             if (zombie.getHP() <= 0) { // 좀비가 죽었을 때
-                System.out.println("정상적으로 좀비가 죽었습니다.");
+//                System.out.println("정상적으로 좀비가 죽었습니다.");
                 if (zombie.dropPotion() == 3 || zombie.dropPotion() == 2 || zombie.dropPotion() == 1) { // 좀비가 포션을 드랍했을 때
-                    System.out.println("하급 포션을 획득하였습니다.");
+                    System.out.println("              하급 포션을 획득하였습니다.");
                     inventory.plusLowerPotion(1);
                 }
                 player.plusKill(1); // 플레이어의 킬 증가
-                System.out.println("킬이 증가하였습니다" + player.getKill() + "킬");
+                System.out.println("           킬이 증가하였습니다" + player.getKill() + "킬");
                 player.plusMoney(zombie.getMONEY()); // 좀비의 돈만큼 플레이어의 돈 추가
-                System.out.println("돈이 증가하였습니다." + zombie.getMONEY() + "원");
+                System.out.println("          돈이 증가하였습니다." + zombie.getMONEY() + "원");
                 System.out.println(player.getKill() + "킬");
                 System.out.println(player.getMoney() + "원");
                 player.plusRating(0.25);

@@ -165,7 +165,7 @@ public class Player {
     }
 
     public void setHP(int HP) {
-        this.Money = HP;
+        this.HP = HP;
     }
 
     public void setRating(double rating) {

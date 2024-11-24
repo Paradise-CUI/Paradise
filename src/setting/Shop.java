@@ -30,11 +30,6 @@ public class Shop {
         blank();
     }
 
-    private boolean haveMoney() {
-
-        return false;
-    }
-
     private static void blank() {
         for (int i = 0; i < 15; i++) {
             System.out.println();

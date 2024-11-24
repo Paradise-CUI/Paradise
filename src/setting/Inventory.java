@@ -65,16 +65,17 @@ public class Inventory {
             } catch (InputMismatchException e) {
                 System.out.println("잘못된 입력입니다. 정수만 입력해주세요.");
                 sc.nextLine();
+                continue;
             }
             if (select == 0) {
-                System.out.println("포션 사용을 종료합니다.");
+                System.out.println("               포션 사용을 종료합니다.");
                 break;
             } else if (select == 1 || select == 2 || select == 3 || select == 4) {
                 if (canPotion(player)) {
                     if (select == 1) {
                         if (this.LowerPotion > 0) {
                             if (player.testPlusHP()) {
-                                System.out.println("포션 사용시 체력이 10이하로 찹니다. 사용하시겠습니까? (y/n)");
+                                System.out.println("        포션 사용시 체력이 10이하로 찹니다. 사용하시겠습니까? (y/n)");
                                 char YorN = sc.next().charAt(0);
                                 if (YorN == 'n' || YorN == 'N') {
                                     break;
@@ -90,7 +91,7 @@ public class Inventory {
                     } else if (select == 2) {
                         if (this.MiddlePotion > 0) {
                             if (player.testPlusHP()) {
-                                System.out.println("포션 사용시 체력이 10이하로 찹니다. 사용하시겠습니까? (y/n)");
+                                System.out.println("        포션 사용시 체력이 10이하로 찹니다. 사용하시겠습니까? (y/n)");
                                 char YorN = sc.next().charAt(0);
                                 if (YorN == 'n' || YorN == 'N') {
                                     break;
@@ -106,7 +107,7 @@ public class Inventory {
                     } else if (select == 3) {
                         if (this.HighPotion > 0) {
                             if (player.testPlusHP()) {
-                                System.out.println("포션 사용시 체력이 10이하로 찹니다. 사용하시겠습니까? (y/n)");
+                                System.out.println("        포션 사용시 체력이 10이하로 찹니다. 사용하시겠습니까? (y/n)");
                                 char YorN = sc.next().charAt(0);
                                 if (YorN == 'n' || YorN == 'N') {
                                     break;
@@ -133,7 +134,7 @@ public class Inventory {
                         }
                     }
                 } else {
-                    System.out.println("포션 사용시 체력이 똑같습니다.");
+                    System.out.println("                   포션 사용시 체력이 똑같습니다.");
                     break;
                 }
             } else {
@@ -165,7 +166,7 @@ public class Inventory {
     }
     public boolean canPotion(Player player) {
         if (player.getMaxHP() == player.getHP()) {
-            System.out.println("이미 최대 체력입니다.");
+            System.out.println("                     이미 최대 체력입니다.");
             return false;
         }
         return true;
