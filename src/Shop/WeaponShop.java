@@ -55,7 +55,7 @@ public class WeaponShop {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
-                        player.plusDamage(damage[select - 1]);
+                        player.setWeaponDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("                        도끼를 구매하셨습니다.");
                         try {
@@ -82,7 +82,7 @@ public class WeaponShop {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
-                        player.plusDamage(damage[select - 1]);
+                        player.setWeaponDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("                 후라이팬을 구매하셨습니다.");
                         try {
@@ -109,7 +109,7 @@ public class WeaponShop {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
-                        player.plusDamage(damage[select - 1]);
+                        player.setWeaponDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("             대검을 구매하셨습니다.");
                         try {
@@ -135,7 +135,7 @@ public class WeaponShop {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
-                        player.plusDamage(damage[select - 1]);
+                        player.setWeaponDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("                   쇠뇌를 구매하셨습니다.");
                         try {
@@ -162,7 +162,7 @@ public class WeaponShop {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
-                        player.plusDamage(damage[select - 1]);
+                        player.setWeaponDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("                    권총을 구매하셨습니다.");
                         try {
@@ -189,7 +189,7 @@ public class WeaponShop {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
-                        player.plusDamage(damage[select - 1]);
+                        player.setWeaponDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("                    샷건을 구매하셨습니다.");
                         try {
@@ -216,7 +216,7 @@ public class WeaponShop {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
-                        player.plusDamage(damage[select - 1]);
+                        player.setWeaponDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("                     소총을 구매하셨습니다.");
                         try {
@@ -243,7 +243,7 @@ public class WeaponShop {
                     if (haveMoney(player, select)) {
                         player.minusMoney(price[select - 1]);
                         player.setWeapon(weapon[select - 1]);
-                        player.plusDamage(damage[select - 1]);
+                        player.setWeaponDamage(damage[select - 1]);
                         haveWeapon[select - 1] = true;
                         System.out.println("                  저격총을 구매하셨습니다.");
                         try {

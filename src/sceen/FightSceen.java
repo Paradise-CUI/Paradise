@@ -4,6 +4,7 @@ package sceen;
 
 import Zombie.*;
 import ending.*;
+import setting.Ending;
 import setting.Inventory;
 import setting.Player;
 import setting.ZombieDefault;
@@ -57,8 +58,8 @@ public class FightSceen {
             if (player.getSpecialAttack()) {
                 System.out.println("턴 : " + attack); // 턴 출력
             }
-            System.out.println("좀비 HP : " + zombie.getHP()); // 좀비 HP 출력
-            System.out.println("플레이어 HP : " + player.getHP()); // 플레이어 HP 출력
+
+            System.out.println("플레이어 HP : " + player.getHP() +  "       좀비 HP : " + zombie.getHP()); // 플레이어 HP 출력 및 좀비 HP 출력
 
             switch (level) { // 좀비의 레벨에 따른 출력
                 case 6:
@@ -117,12 +118,12 @@ public class FightSceen {
 
             if (select == 1) { // 공격을 했을 때
                 if (player.getSpecialAttack() && attack / 5 == 0) { // 특수공격이 활성화가 되어있고 공격의 5번이 되었다면
-                    zombie.minusHP((player.getDAMAGE() * 3)); // 특수공격이 활성화가 되어있다면 3배의 데미지를 줌
+                    zombie.minusHP((int)((player.getDAMAGE() + player.getWeaponDamage()) * 3)); // 특수공격이 활성화가 되어있다면 3배의 데미지를 줌
                     System.out.println("특수공격을 사용하였습니다.");
-                    System.out.println("입힌 데미지 : " + (player.getDAMAGE() * 3));
+                    System.out.println("입힌 데미지 : " + (int)((player.getDAMAGE() + player.getWeaponDamage()) * 3));
                 } else {
                     zombie.minusHP(player.getDAMAGE()); // 플레이어가 좀비에게 데미지를 줌
-                    System.out.println("입힌 데미지 : " + player.getDAMAGE());
+                    System.out.println("입힌 데미지 : " + (int)(player.getDAMAGE() + player.getWeaponDamage()));
                 }
             } else if (select == 2) { // 포션을 사용했을 때
                 if (inventory.allPotion()) { // 포션이 있다면
@@ -133,6 +134,7 @@ public class FightSceen {
                 }
             } else if (select == 3) { // 도망가기
                 System.out.println("도망가기");
+                player.setHP(1);
                 break;
 
             } else {
@@ -141,15 +143,16 @@ public class FightSceen {
             }
 
             player.minusHP((zombie.getDAMAGE() / (int) player.getRating())); // 좀비가 플레이어에게 데미지를 줌
+            System.out.println("받은 데미지 : " + (zombie.getDAMAGE() / (int) player.getRating()));
             player.plusInfectiousness(zombie.getINFECTIOUSNESS()); // 좀비가 플레이어에게 감염율을 줌
 
-            // 엔딩
+
+            // 죽거나 감염 엔딩
             if (player.getHP() <= 0) { // 플레이어가 죽었을 때
-                DieEnding.dieending(); // 다이 엔딩 띄우기
+                SacrificeEnding.sacrificeEnding(); // 다이 엔딩 띄우기
             } else if (player.getInfectiousness() >= 100) { // 플레이어가 감염되었을 때
                 InfecteEnding.infecteending(); // 감염 엔딩 띄우기
             }
-
 
             if (zombie.getHP() <= 0) { // 좀비가 죽었을 때
                 System.out.println("정상적으로 좀비가 죽었습니다.");
@@ -163,6 +166,11 @@ public class FightSceen {
                 System.out.println("돈이 증가하였습니다." + zombie.getMONEY() + "원");
                 System.out.println(player.getKill() + "킬");
                 System.out.println(player.getMoney() + "원");
+
+                if (level == 1) {
+                    Ending.ending(player);
+                }
+
             }
             sec2();
             nextText();

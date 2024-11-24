@@ -3,13 +3,14 @@ package setting;
 public class Player {
     int kill; // 잡은 좀비
     int Money; // 소지금
+    int maxHP; // 최대 체력
     int HP; // 체력
+    double weaponDamage; // 무기 공격력
     double DAMAGE; // 공격력
     boolean SpecialAttack; // 특수 공격 사용 가능 여부
     double rating; // 지지율
     double Infectiousness; // 감염율
     String Weapon; // 무기
-    int maxHP;
 
 
     public Player() { // 플레이어 기본 세팅
@@ -17,6 +18,7 @@ public class Player {
         this.Money = 400; // 400
         this.maxHP = 300;
         this.HP = 300;
+        this.weaponDamage = 0.0;
         this.DAMAGE = 34.0;
         this.SpecialAttack = false;
         this.rating = 1.0;
@@ -30,7 +32,7 @@ public class Player {
         System.out.println("                             MONEY : " + this.Money);
         System.out.println("                           최대 채력 : " + this.maxHP);
         System.out.println("                                HP : " + this.HP);
-        System.out.println("                            DAMEGE : " + this.DAMAGE);
+        System.out.println("                            DAMEGE : " + (int)(this.DAMAGE + this.weaponDamage));
         System.out.println("                            WEAPON : " + this.Weapon);
         if (this.SpecialAttack) {
             System.out.println("                            특수 공격 사용 가능");
@@ -145,6 +147,10 @@ public class Player {
         return this.maxHP;
     }
 
+    public double getWeaponDamage() {
+        return this.weaponDamage;
+    }
+
     // 설정
     public void setSpecialAttack(boolean SpecialAttack) {
         this.SpecialAttack = SpecialAttack;
@@ -164,6 +170,10 @@ public class Player {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public void setWeaponDamage(double weaponDamage) {
+        this.weaponDamage = weaponDamage;
     }
 
 
