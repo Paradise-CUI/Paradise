@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class PotionShop {
     static Scanner sc = new Scanner(System.in);
     String[] potion = {"중급 포션", "상급 포션", "백신"}; // 하급 포션은 몬스터 드랍
-    static int[] potionPrice = {100, 500, 2000}; // 포션 가격
+    static int[] potionPrice = {100, 500, 3000}; // 포션 가격
 
     public static void potion(Player player, Inventory inventory) {
         int select = 0;
@@ -84,7 +84,7 @@ public class PotionShop {
     public static void print() {
         System.out.println("                            1. 중급 포션 (100원)");
         System.out.println("                            2. 상급 포션 (500원)");
-        System.out.println("                            3. 백신 (2000원)");
+        System.out.println("                            3. 백신 (3000원)");
         System.out.println("                            0. 상점 종료");
         blank();
     }

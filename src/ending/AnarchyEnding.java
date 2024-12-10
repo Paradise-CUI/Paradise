@@ -24,7 +24,7 @@ public class AnarchyEnding {
         sec3();
         nextText();
         try {
-            String Capitalism = new String(Files.readAllBytes(Paths.get("Art/Ending/Capitalism.txt")));
+            String Capitalism = new String(Files.readAllBytes(Paths.get("Art/Ending/Anarchy.txt")));
             System.out.println(Capitalism); // 파일 내용 출력
         } catch (IOException e) {
             System.err.println("파일을 읽는 중 오류가 발생했습니다: " + e.getMessage());

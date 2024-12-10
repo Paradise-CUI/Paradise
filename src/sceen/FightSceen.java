@@ -22,6 +22,7 @@ import java.util.Scanner;
 
 public class FightSceen {
     public static boolean Exit = false;
+
     public static void fightSceen(int level, Player player, Inventory inventory) {
         Scanner sc = new java.util.Scanner(System.in);
         ZombieDefault zombie = null;
@@ -58,7 +59,7 @@ public class FightSceen {
                 System.out.println("턴 : " + attack); // 턴 출력
             }
 
-            System.out.println("플레이어 HP : " + player.getHP() +  "       좀비 HP : " + zombie.getHP() + "          감염율 : " + player.getInfectiousness()); // 플레이어 HP 출력 및 좀비 HP 출력
+            System.out.println("플레이어 HP : " + player.getHP() + "       좀비 HP : " + zombie.getHP() + "          감염율 : " + player.getInfectiousness()); // 플레이어 HP 출력 및 좀비 HP 출력
 
             switch (level) { // 좀비의 레벨에 따른 출력
                 case 6:
@@ -119,13 +120,13 @@ public class FightSceen {
 
             if (select == 1) { // 공격을 했을 때
                 if (player.getSpecialAttack() && attack % 5 == 0) { // 특수공격이 활성화가 되어있고 공격의 5번이 되었다면
-                    zombie.minusHP((int)((player.getDAMAGE() + player.getWeaponDamage()) * 3)); // 특수공격이 활성화가 되어있다면 3배의 데미지를 줌
+                    zombie.minusHP((int) ((player.getDAMAGE() + player.getWeaponDamage()) * 3)); // 특수공격이 활성화가 되어있다면 3배의 데미지를 줌
                     System.out.println("                  특수공격을 사용하였습니다.");
-                    System.out.println("                      입힌 데미지 : " + (int)((player.getDAMAGE() + player.getWeaponDamage()) * 3));
+                    System.out.println("                      입힌 데미지 : " + (int) ((player.getDAMAGE() + player.getWeaponDamage()) * 3));
                     attack = 0;
                 } else {
-                    zombie.minusHP(player.getDAMAGE()); // 플레이어가 좀비에게 데미지를 줌
-                    System.out.println("                      입힌 데미지 : " + (int)(player.getDAMAGE() + player.getWeaponDamage()));
+                    zombie.minusHP(player.getDAMAGE() + player.getWeaponDamage()); // 플레이어가 좀비에게 데미지를 줌
+                    System.out.println("                      입힌 데미지 : " + (int) (player.getDAMAGE() + player.getWeaponDamage()));
                 }
             } else if (select == 2) { // 포션을 사용했을 때
                 if (inventory.allPotion()) { // 포션이 있다면
@@ -146,7 +147,7 @@ public class FightSceen {
             }
 
             player.minusHP((zombie.getDAMAGE() / (int) player.getRating())); // 좀비가 플레이어에게 데미지를 줌
-            System.out.println("                      받은 데미지 : " + (zombie.getDAMAGE() / (int) player.getRating()));
+            System.out.println("                      받은 데미지 : " + (zombie.getDAMAGE() / ratingMinus(player)));
             player.plusInfectiousness(zombie.getINFECTIOUSNESS()); // 좀비가 플레이어에게 감염율을 줌
 
 
@@ -169,7 +170,7 @@ public class FightSceen {
                 System.out.println("          돈이 증가하였습니다." + zombie.getMONEY() + "원");
                 System.out.println(player.getKill() + "킬");
                 System.out.println(player.getMoney() + "원");
-                player.plusRating(0.25);
+                player.plusRating(0.1);
 
                 if (level == 1) {
                     Ending.ending(player);
@@ -185,20 +186,28 @@ public class FightSceen {
     }
 
 
-    // 다음 텍스트 전환 (스크롤)
-    private static void nextText() {
-        for (int i = 0; i < 100; i++) {
-            System.out.println();
+    public static int ratingMinus(Player player) {
+        if (player.getRating() >= 5.0) {
+            return 5;
+        } else {
+            return (int)player.getRating();
         }
     }
 
-    // 2초 대기
-    private static void sec2() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        // 다음 텍스트 전환 (스크롤)
+        private static void nextText () {
+            for (int i = 0; i < 100; i++) {
+                System.out.println();
+            }
         }
-    }
 
-}
+        // 2초 대기
+        private static void sec2 () {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }

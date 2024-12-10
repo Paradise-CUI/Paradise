@@ -123,7 +123,7 @@ public class Inventory {
                     } else if (select == 4) {
                         if (this.vaccine > 0) {
                             this.vaccine--;
-                            player.minusInfectiousness(5.0);
+                            player.minusInfectiousness(20.0);
                             if (player.getInfectiousness() < 0) {
                                 player.setInfectiousness(0);
                             }
